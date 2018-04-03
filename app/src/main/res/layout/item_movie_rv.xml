@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorCardBackground"
+            android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_big"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/no_image" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:orientation="horizontal"
+                    android:padding="0dp">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:fontFamily="sans-serif-black"
+                        android:gravity="start"
+                        android:maxLines="2"
+                        android:textSize="17sp"
+                        android:text="Dummy Text Cafer Cafer Cafer"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:padding="1dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/vote"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:fontFamily="sans-serif"
+                                android:textStyle="italic|bold"
+                                android:textSize="13sp"
+                                android:gravity="center"
+                                android:text="7.9" />
+
+                            <ImageView
+                                android:id="@+id/iv_vote"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/rate1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:padding="1dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/release_date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:fontFamily="sans-serif"
+                                android:textStyle="italic|bold"
+                                android:gravity="center"
+                                android:textSize="13sp"
+                                android:text="2015" />
+
+                            <ImageView
+                                android:id="@+id/iv_date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/date1" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="start">
+
+                    <TextView
+                        android:id="@+id/genres"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:singleLine="true"
+                        android:gravity="start"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="italic|bold"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit ="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:text="Dummy Text" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="6"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/overview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:fontFamily="sans-serif-condensed"
+                        android:textStyle="normal"
+                        android:text="Dummy Text Dummy "
+                        android:ellipsize="end"
+                        android:maxLines="5"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:gravity="end">
+
+                    <ImageView
+                        android:id="@+id/iv_like"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/like1" />
+
+                    <ImageView
+                        android:id="@+id/iv_watch_list"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/watch_list1" />
+
+                </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

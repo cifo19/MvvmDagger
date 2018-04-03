@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.caferk.my_movies"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    implementation "com.android.support:appcompat-v7:$androidSupportVersion"
+    implementation "com.android.support:design:$androidSupportVersion"
+    implementation "com.android.support:support-annotations:$androidSupportVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    implementation "javax.annotation:jsr250-api:$javaxAnnotationVersion"
+    implementation "javax.inject:javax.inject:$javaxInjectVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitRxJava2AdapterVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
+    implementation "com.android.support:support-v4:$androidSupportVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.jakewharton:butterknife:$butterKnifeVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.android.support:cardview-v7:$androidSupportVersion"
+    implementation "com.android.support:recyclerview-v7:$androidSupportVersion"
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+    implementation "android.arch.lifecycle:extensions:$architectureComponents"
+
+    annotationProcessor "android.arch.lifecycle:compiler:$architectureComponents"
+
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    kapt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+}

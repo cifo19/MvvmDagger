@@ -1,0 +1,15 @@
+# Created by .gitignore support plugin (hsz.mobi)
+.idea
+build
+reports
+*.iml
+local.properties
+signing.properties
+yemeksepeti.keystore
+.gradle/
+.navigation/
+*.hprof
+*.txt
+captures/
+*.log
+*.DS_STORE
