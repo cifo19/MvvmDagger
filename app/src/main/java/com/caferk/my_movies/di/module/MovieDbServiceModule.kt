@@ -34,9 +34,8 @@ open class MovieDbServiceModule {
 
     @Provides
     @Singleton
-    fun getRetrofit(gson: Gson, okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
+    fun getRetrofit(okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(gsonConverterFactory)
                 .client(okHttpClient)

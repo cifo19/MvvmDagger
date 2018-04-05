@@ -1,10 +1,10 @@
 package com.caferk.my_movies.ui.movie.popular
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.Toast
@@ -14,7 +14,6 @@ import com.caferk.kotlinbasearchitecture.domain.entity.ResultsItem
 import com.caferk.my_movies.R
 import com.caferk.my_movies.ui.adapter.RecyclerMovieAdapter
 import com.caferk.my_movies.ui.base.BaseFragment
-import com.caferk.my_movies.ui.movie.MainActivity
 import javax.inject.Inject
 
 /**
@@ -28,7 +27,7 @@ class PopularMoviesFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    lateinit var popularMoviesViewModel: PopularMoviesViewModel
+    private lateinit var popularMoviesViewModel: PopularMoviesViewModel
 
     @BindView(R.id.frPopularMovies_rvMovies)
     lateinit var recyclerView: RecyclerView
@@ -47,8 +46,8 @@ class PopularMoviesFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         popularMoviesViewModel = ViewModelProviders.of(this, viewModelFactory)[PopularMoviesViewModel::class.java]
+        setViewModel(popularMoviesViewModel)
         popularMoviesViewModel.movieListData.observe(this, Observer {
-            (activity as MainActivity).hideLoader()
             showPopularMovies(it?.results)
         })
     }
@@ -59,8 +58,9 @@ class PopularMoviesFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = arguments?.getString(TITLE_KEY)
-        (activity as MainActivity).showLoader()
+        getBaseActivity().let {
+            it.supportActionBar?.title = arguments?.getString(TITLE_KEY)
+        }
         popularMoviesViewModel.getMovieList()
     }
 
