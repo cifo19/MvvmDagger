@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel
 /**
  * Created by cafer on 5.4.2018.
  */
-open class BaseViewModel : ViewModel() {
-    val loading : MutableLiveData<Boolean> = MutableLiveData()
+abstract class BaseViewModel : ViewModel() {
+
+    val loadingLiveData : MutableLiveData<Boolean> = MutableLiveData()
 }

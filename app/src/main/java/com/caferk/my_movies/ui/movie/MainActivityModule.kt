@@ -15,4 +15,5 @@ abstract class MainActivityModule {
     @PerFragment
     @ContributesAndroidInjector(modules = [(FRPopularMoviesModule::class)])
     abstract fun contributePopularMoviesFragment(): PopularMoviesFragment
+
 }

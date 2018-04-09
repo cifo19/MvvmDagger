@@ -47,7 +47,7 @@ class PopularMoviesFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         popularMoviesViewModel = ViewModelProviders.of(this, viewModelFactory)[PopularMoviesViewModel::class.java]
         setViewModel(popularMoviesViewModel)
-        popularMoviesViewModel.movieListData.observe(this, Observer {
+        popularMoviesViewModel.movieListLiveData.observe(this, Observer {
             showPopularMovies(it?.results)
         })
     }

@@ -52,7 +52,7 @@ abstract class BaseFragment : Fragment() {
         return activity as BaseActivity
     }
 
-    private fun setLoadingState() = viewModel.loading.observe(
+    private fun setLoadingState() = viewModel.loadingLiveData.observe(
             this, Observer {
         when (it) {
             true -> (activity as BaseActivity).showLoader()

@@ -4,6 +4,7 @@ import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
 import com.caferk.kotlinbasearchitecture.domain.entity.PersonImages
 import com.caferk.kotlinbasearchitecture.domain.entity.PersonMovieCredits
 import com.caferk.my_movies.model.RestApi
+import com.caferk.my_movies.ui.base.BaseDataModel
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 import retrofit2.Response
@@ -16,15 +17,15 @@ import javax.inject.Singleton
  */
 @Singleton
 open class MovieDataModel
-@Inject constructor(val restApi: RestApi) {
+@Inject constructor(val restApi: RestApi) : BaseDataModel{
 
-    fun getPopularMovies(language: String, page: Int): Observable<MovieResults> {
+    override fun getPopularMovies(language: String, page: Int): Observable<MovieResults> {
         return restApi.getPopularMovies(language, page)
                 .delay(5000, TimeUnit.MILLISECONDS)
                 .map { it.body() }
     }
 
-    fun getMovieDetails(movieId: Int): Observable<Pair<String?, String?>> {
+    override fun getMovieDetails(movieId: Int): Observable<Pair<String?, String?>> {
         return restApi.getCreditsByMovie(movieId)
                 .map { it.body()?.cast?.get(0)?.id }
                 .flatMap { it ->

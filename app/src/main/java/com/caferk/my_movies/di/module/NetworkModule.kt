@@ -32,7 +32,7 @@ open class NetworkModule {
     @Provides
     @Singleton
     fun getHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        val httpLoggingInterceptor = HttpLoggingInterceptor({ Timber.i(it) })
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return httpLoggingInterceptor
     }
