@@ -44,22 +44,13 @@ abstract class BaseFragment : Fragment() {
         } catch (e: Exception) {
             Log.d("Butterknife exception", e.message)
         }
-        setLoadingState()
+        (activity as BaseActivity).setLoadingState(viewModel.loadingLiveData)
         return view
     }
 
     fun getBaseActivity(): BaseActivity {
         return activity as BaseActivity
     }
-
-    private fun setLoadingState() = viewModel.loadingLiveData.observe(
-            this, Observer {
-        when (it) {
-            true -> (activity as BaseActivity).showLoader()
-            false -> (activity as BaseActivity).hideLoader()
-        }
-    }
-    )
 
     override fun onDestroy() {
         super.onDestroy()

@@ -1,5 +1,6 @@
 package com.caferk.my_movies.ui.base
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelStore
 import android.content.Context
@@ -32,7 +33,9 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         initializeActivity(savedInstanceState)
         initializeProgressBar()
         initializeToolbar()
-        setLoadingState()
+        if (viewModel != null){
+            setLoadingState(viewModel?.loadingLiveData!!)
+        }
     }
 
     internal abstract fun initializeActivity(savedInstanceState: Bundle?)
@@ -91,7 +94,7 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         return applicationContext
     }
 
-    private fun setLoadingState() = viewModel?.loadingLiveData?.observe(
+    fun setLoadingState(loadingLiveData: MutableLiveData<Boolean>) = loadingLiveData.observe(
         this, Observer {
             when (it) {
                 true -> showLoader()
