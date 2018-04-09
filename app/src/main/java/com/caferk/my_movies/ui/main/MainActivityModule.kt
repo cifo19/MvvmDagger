@@ -1,8 +1,8 @@
-package com.caferk.my_movies.ui.movie
+package com.caferk.my_movies.ui.main
 
 import com.caferk.my_movies.di.scope.PerFragment
-import com.caferk.my_movies.ui.movie.popular.FRPopularMoviesModule
-import com.caferk.my_movies.ui.movie.popular.PopularMoviesFragment
+import com.caferk.my_movies.ui.main.popular.FRPopularMoviesModule
+import com.caferk.my_movies.ui.main.popular.PopularMoviesFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

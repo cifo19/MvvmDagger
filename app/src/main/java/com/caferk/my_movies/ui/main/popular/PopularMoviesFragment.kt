@@ -1,9 +1,9 @@
-package com.caferk.my_movies.ui.movie.popular
+package com.caferk.my_movies.ui.main.popular
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -14,6 +14,7 @@ import com.caferk.kotlinbasearchitecture.domain.entity.ResultsItem
 import com.caferk.my_movies.R
 import com.caferk.my_movies.ui.adapter.RecyclerMovieAdapter
 import com.caferk.my_movies.ui.base.BaseFragment
+import com.caferk.my_movies.ui.detail.DetailActivity
 import javax.inject.Inject
 
 /**
@@ -67,9 +68,9 @@ class PopularMoviesFragment : BaseFragment() {
 
     @OnClick(R.id.btn_create_new_note)
     fun onButtonClicked() {
-        /*val intent = Intent(activity, DetailActivity::class.java)
+        val intent = Intent(activity, DetailActivity::class.java)
         intent.putExtra(DetailActivity.MOVIE_ID, recyclerMovieAdapter.list[0].id)
-        startActivity(intent)*/
+        startActivity(intent)
     }
 
     fun showPersonDetails(pair: Pair<String?, String?>) {

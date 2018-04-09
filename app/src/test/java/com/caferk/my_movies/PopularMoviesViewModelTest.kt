@@ -4,11 +4,10 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
 import android.support.annotation.NonNull
 import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
-import com.caferk.my_movies.ui.movie.popular.MovieDataModel
-import com.caferk.my_movies.ui.movie.popular.PopularMoviesViewModel
+import com.caferk.my_movies.ui.main.popular.MovieDataModel
+import com.caferk.my_movies.ui.main.popular.PopularMoviesViewModel
 import com.caferk.my_movies.util.gsonUpper
 import com.caferk.my_movies.util.parseFileWith
-import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable

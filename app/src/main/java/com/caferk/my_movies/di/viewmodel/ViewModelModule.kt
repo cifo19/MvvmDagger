@@ -2,7 +2,8 @@ package com.caferk.my_movies.di.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.caferk.my_movies.ui.movie.popular.PopularMoviesViewModel
+import com.caferk.my_movies.ui.detail.DetailViewModel
+import com.caferk.my_movies.ui.main.popular.PopularMoviesViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -20,6 +21,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PopularMoviesViewModel::class)
     internal abstract fun mainViewModel(viewModel: PopularMoviesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailViewModel::class)
+    internal abstract fun detailViewModel(viewModel: DetailViewModel): ViewModel
 
     //Add more ViewModels here
 }

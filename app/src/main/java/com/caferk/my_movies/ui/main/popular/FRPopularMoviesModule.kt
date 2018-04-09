@@ -1,4 +1,4 @@
-package com.caferk.my_movies.ui.movie.popular
+package com.caferk.my_movies.ui.main.popular
 
 import dagger.Module
 

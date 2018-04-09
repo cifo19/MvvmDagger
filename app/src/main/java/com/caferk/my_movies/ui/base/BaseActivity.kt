@@ -1,5 +1,7 @@
 package com.caferk.my_movies.ui.base
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelStore
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -19,6 +21,7 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var toolbar: Toolbar
     lateinit var progressBar: ProgressBar
     lateinit var relativeLayout: RelativeLayout
+    private var viewModel: BaseViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,7 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         initializeActivity(savedInstanceState)
         initializeProgressBar()
         initializeToolbar()
+        setLoadingState()
     }
 
     internal abstract fun initializeActivity(savedInstanceState: Bundle?)
@@ -46,6 +50,10 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         } else {
             toolbar.visibility = View.GONE
         }
+    }
+
+    protected fun setViewModel(viewModel: BaseViewModel?) {
+        this.viewModel = viewModel
     }
 
     private fun initializeActivityComponent() {
@@ -82,4 +90,13 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
     fun context(): Context {
         return applicationContext
     }
+
+    private fun setLoadingState() = viewModel?.loadingLiveData?.observe(
+        this, Observer {
+            when (it) {
+                true -> showLoader()
+                false -> hideLoader()
+            }
+        }
+    )
 }

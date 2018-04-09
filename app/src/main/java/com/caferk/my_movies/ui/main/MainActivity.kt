@@ -1,10 +1,10 @@
-package com.caferk.my_movies.ui.movie
+package com.caferk.my_movies.ui.main
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.caferk.my_movies.R
 import com.caferk.my_movies.ui.base.BaseActivity
-import com.caferk.my_movies.ui.movie.popular.PopularMoviesFragment
+import com.caferk.my_movies.ui.main.popular.PopularMoviesFragment
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import javax.inject.Inject
@@ -22,6 +22,7 @@ class MainActivity : BaseActivity() {
         if (savedInstanceState == null) {
             addFragment(R.id.fragment_container, PopularMoviesFragment.newInstance("Custom Title"))
         }
+        setViewModel(null)
     }
 
     override fun useBackToolbar(): Boolean {

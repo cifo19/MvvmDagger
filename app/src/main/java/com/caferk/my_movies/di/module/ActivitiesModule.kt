@@ -1,8 +1,10 @@
 package com.caferk.my_movies.di.module
 
 import com.caferk.my_movies.di.scope.PerActivity
-import com.caferk.my_movies.ui.movie.MainActivity
-import com.caferk.my_movies.ui.movie.MainActivityModule
+import com.caferk.my_movies.ui.detail.DetailActivity
+import com.caferk.my_movies.ui.detail.DetailActivityModule
+import com.caferk.my_movies.ui.main.MainActivity
+import com.caferk.my_movies.ui.main.MainActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -15,7 +17,7 @@ abstract class ActivitiesModule {
     @ContributesAndroidInjector(modules = [(MainActivityModule::class)])
     abstract fun contributesMainActivity(): MainActivity
 
-    /*@PerActivity
+    @PerActivity
     @ContributesAndroidInjector(modules = [(DetailActivityModule::class)])
-    abstract fun contributesDetailActivity(): DetailActivity*/
+    abstract fun contributesDetailActivity(): DetailActivity
 }
