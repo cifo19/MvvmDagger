@@ -2,7 +2,6 @@ package com.caferk.my_movies.ui.base
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelStore
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,15 +13,15 @@ import android.widget.RelativeLayout
 import com.caferk.my_movies.R
 import dagger.android.AndroidInjection
 import dagger.android.support.HasSupportFragmentInjector
+import io.reactivex.annotations.Nullable
 
 /**
  * Created by cafer on 2.4.2018.
  */
 abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
-    lateinit var toolbar: Toolbar
-    lateinit var progressBar: ProgressBar
-    lateinit var relativeLayout: RelativeLayout
-    private var viewModel: BaseViewModel? = null
+    private lateinit var toolbar: Toolbar
+    private lateinit var progressBar: ProgressBar
+    private lateinit var relativeLayout: RelativeLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +32,8 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         initializeActivity(savedInstanceState)
         initializeProgressBar()
         initializeToolbar()
-        if (viewModel != null){
-            setLoadingState(viewModel?.loadingLiveData!!)
+        if (getViewModel() != null) {
+            setLoadingState(getViewModel()?.loadingLiveData!!)
         }
     }
 
@@ -55,9 +54,8 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
     }
 
-    protected fun setViewModel(viewModel: BaseViewModel?) {
-        this.viewModel = viewModel
-    }
+    @Nullable
+    abstract fun getViewModel(): BaseViewModel?
 
     private fun initializeActivityComponent() {
         AndroidInjection.inject(this)
@@ -80,13 +78,13 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         progressBar.visibility = View.GONE
     }
 
-    fun isLoaderShowing(): Boolean? = progressBar.visibility == View.VISIBLE
+    private fun isLoaderShowing(): Boolean? = progressBar.visibility == View.VISIBLE
 
-    fun showLoader() {
+    private fun showLoader() {
         progressBar.visibility = View.VISIBLE
     }
 
-    fun hideLoader() {
+    private fun hideLoader() {
         progressBar.visibility = View.GONE
     }
 
@@ -95,11 +93,11 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     fun setLoadingState(loadingLiveData: MutableLiveData<Boolean>) = loadingLiveData.observe(
-        this, Observer {
-            when (it) {
-                true -> showLoader()
-                false -> hideLoader()
-            }
+            this, Observer {
+        when (it) {
+            true -> if (!isLoaderShowing()!!) showLoader()
+            false -> if (isLoaderShowing()!!) hideLoader()
         }
+    }
     )
 }

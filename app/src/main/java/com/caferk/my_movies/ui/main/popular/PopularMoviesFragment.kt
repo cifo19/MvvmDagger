@@ -7,13 +7,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.Toast
 import butterknife.BindView
 import butterknife.OnClick
 import com.caferk.kotlinbasearchitecture.domain.entity.ResultsItem
 import com.caferk.my_movies.R
 import com.caferk.my_movies.ui.adapter.RecyclerMovieAdapter
 import com.caferk.my_movies.ui.base.BaseFragment
+import com.caferk.my_movies.ui.base.BaseViewModel
 import com.caferk.my_movies.ui.detail.DetailActivity
 import javax.inject.Inject
 
@@ -47,7 +47,6 @@ class PopularMoviesFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         popularMoviesViewModel = ViewModelProviders.of(this, viewModelFactory)[PopularMoviesViewModel::class.java]
-        setViewModel(popularMoviesViewModel)
         popularMoviesViewModel.movieListLiveData.observe(this, Observer {
             showPopularMovies(it?.results)
         })
@@ -55,6 +54,10 @@ class PopularMoviesFragment : BaseFragment() {
 
     override fun layoutId(): Int {
         return R.layout.fragment_movies
+    }
+
+    override fun getViewModel(): BaseViewModel? {
+        return popularMoviesViewModel
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -68,13 +71,11 @@ class PopularMoviesFragment : BaseFragment() {
 
     @OnClick(R.id.btn_create_new_note)
     fun onButtonClicked() {
-        val intent = Intent(activity, DetailActivity::class.java)
-        intent.putExtra(DetailActivity.MOVIE_ID, recyclerMovieAdapter.list[0].id)
-        startActivity(intent)
-    }
-
-    fun showPersonDetails(pair: Pair<String?, String?>) {
-        Toast.makeText(context, pair.first + " " + pair.second, Toast.LENGTH_SHORT).show()
+        if (!recyclerMovieAdapter.list.isEmpty()) {
+            val intent = Intent(activity, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.MOVIE_ID, recyclerMovieAdapter.list[0].id)
+            startActivity(intent)
+        }
     }
 
     fun showPopularMovies(popularMoviesList: List<ResultsItem>?) {

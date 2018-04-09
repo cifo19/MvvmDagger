@@ -1,7 +1,5 @@
 package com.caferk.my_movies.ui.base
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModel
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
@@ -12,6 +10,7 @@ import android.view.ViewGroup
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import dagger.android.support.AndroidSupportInjection
+import io.reactivex.annotations.Nullable
 
 /**
  * Created by cafer on 16.2.2018.
@@ -19,7 +18,6 @@ import dagger.android.support.AndroidSupportInjection
 abstract class BaseFragment : Fragment() {
 
     private lateinit var unBinder: Unbinder
-    private lateinit var viewModel: BaseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
@@ -29,9 +27,8 @@ abstract class BaseFragment : Fragment() {
     @LayoutRes
     protected abstract fun layoutId(): Int
 
-    protected fun setViewModel(viewModel: BaseViewModel){
-        this.viewModel = viewModel
-    }
+    @Nullable
+    abstract fun getViewModel(): BaseViewModel?
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -44,7 +41,7 @@ abstract class BaseFragment : Fragment() {
         } catch (e: Exception) {
             Log.d("Butterknife exception", e.message)
         }
-        (activity as BaseActivity).setLoadingState(viewModel.loadingLiveData)
+        (activity as BaseActivity).setLoadingState(getViewModel()?.loadingLiveData!!)
         return view
     }
 

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.widget.Toast
 import com.caferk.my_movies.ui.base.BaseActivity
+import com.caferk.my_movies.ui.base.BaseViewModel
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import javax.inject.Inject
@@ -27,7 +28,6 @@ class DetailActivity : BaseActivity() {
 
     override fun initializeActivity(savedInstanceState: Bundle?) {
         detailViewModel = ViewModelProviders.of(this, viewModelFactory)[DetailViewModel::class.java]
-        setViewModel(detailViewModel)
 
         val movieId = intent.getIntExtra(MOVIE_ID, -1)
 
@@ -42,6 +42,10 @@ class DetailActivity : BaseActivity() {
         }
 
         detailViewModel.getMovieDetail(movieId = movieId)
+    }
+
+    override fun getViewModel(): BaseViewModel? {
+        return detailViewModel
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {

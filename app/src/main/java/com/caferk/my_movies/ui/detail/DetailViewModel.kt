@@ -30,7 +30,7 @@ class DetailViewModel @Inject constructor(val movieDataModel: MovieDataModel) : 
             .subscribe ({
                 pairLiveData.postValue(it)
             },{
-                pairLiveData.postValue(null)
+                errorLiveData.postValue(null)
             }))
     }
 

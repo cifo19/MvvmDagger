@@ -15,6 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/padding_normal"
-        android:text="@string/button_create_new_note" />
+        android:text="@string/button_show_first_movie_detail" />
 
 </RelativeLayout>
