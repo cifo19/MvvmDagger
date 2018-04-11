@@ -22,5 +22,4 @@ open class ApplicationModule {
     fun provideSharedPreferences(context: BaseApplication): SharedPreferences {
         return context.getSharedPreferences(SHARED_PACKAGE, Context.MODE_PRIVATE)
     }
-
 }

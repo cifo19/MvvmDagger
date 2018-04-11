@@ -8,7 +8,6 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.caferk.kotlinbasearchitecture.domain.entity.ResultsItem
-import com.caferk.my_movies.BaseApplication
 import com.caferk.my_movies.R
 import javax.inject.Inject
 
@@ -16,12 +15,11 @@ import javax.inject.Inject
  * Created by cafer on 13.3.2018.
  */
 class RecyclerMovieAdapter @Inject constructor(
-        val list: MutableList<ResultsItem>,
-        val context: BaseApplication
+        val list: MutableList<ResultsItem>
 ) : RecyclerView.Adapter<RecyclerMovieAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.item_movie_rv, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_rv, parent, false)
         return ViewHolder(view)
     }
 

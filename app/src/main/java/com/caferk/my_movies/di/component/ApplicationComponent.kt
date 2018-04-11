@@ -22,7 +22,7 @@ import javax.inject.Singleton
             (ActivitiesModule::class), (UIModule::class), (ViewModelModule::class),
             (AndroidInjectionModule::class), (AndroidSupportInjectionModule::class)]
 )
-interface ApplicationComponent : AndroidInjector<BaseApplication> {
+interface ApplicationComponent {
 
     @Component.Builder
     interface Builder {
@@ -32,4 +32,6 @@ interface ApplicationComponent : AndroidInjector<BaseApplication> {
         @BindsInstance
         fun baseApplication(application: BaseApplication): Builder
     }
+
+    fun inject(baseApplication: BaseApplication)
 }
