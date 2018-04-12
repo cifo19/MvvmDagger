@@ -13,6 +13,20 @@ android {
         versionName "1.0"
         testInstrumentationRunner "com.caferk.my_movies.testrunner.MockTestRunner"
     }
+
+    sourceSets {
+        String sharedTestJavaDir = 'src/sharedTest/java'
+
+        test {
+            java.srcDirs += [sharedTestJavaDir]
+        }
+
+        androidTest {
+            java.srcDirs += [sharedTestJavaDir]
+            resources.srcDirs += ['src/test/resources']
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false

@@ -3,17 +3,12 @@ package com.caferk.my_movies
 import android.content.Intent
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.intent.Intents
-import android.support.test.espresso.intent.Intents.intended
-import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
-import com.caferk.my_movies.ui.detail.DetailActivity
 import com.caferk.my_movies.ui.main.MainActivity
 import com.caferk.my_movies.ui.main.popular.MovieDataModel
 import com.caferk.my_movies.util.gsonUpper
@@ -21,7 +16,6 @@ import com.caferk.my_movies.util.parseFileWith
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
 import org.junit.Before
-import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
