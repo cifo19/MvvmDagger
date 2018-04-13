@@ -15,16 +15,7 @@ android {
     }
 
     sourceSets {
-        String sharedTestJavaDir = 'src/sharedTest/java'
-
-        test {
-            java.srcDirs += [sharedTestJavaDir]
-        }
-
-        androidTest {
-            java.srcDirs += [sharedTestJavaDir]
-            resources.srcDirs += ['src/test/resources']
-        }
+        androidTest.resources.srcDirs += ['src/test/resources']
     }
 
     buildTypes {
@@ -32,10 +23,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-
-    defaultConfig {
-        multiDexEnabled true
     }
 }
 
