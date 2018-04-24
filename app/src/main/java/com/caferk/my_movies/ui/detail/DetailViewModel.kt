@@ -22,16 +22,22 @@ class DetailViewModel @Inject constructor(val movieDataModel: MovieDataModel) : 
             return
         }
 
-        compositeDisposable.add(movieDataModel.getMovieDetails(movieId = movieId)
-            .doOnSubscribe { loadingLiveData.postValue(true) }
-            .doOnTerminate { loadingLiveData.postValue(false) }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe ({
-                pairLiveData.postValue(it)
-            },{
-                errorLiveData.postValue(null)
-            }))
+        compositeDisposable.add(movieDataModel.getMovieDetails(movieId = movieId)!!
+                .doOnSubscribe { loadingLiveData.postValue(true) }
+                .doOnTerminate { loadingLiveData.postValue(false) }
+                .map {
+                    Pair(
+                            it.first?.cast?.get(0)?.character
+                            , it.second?.profiles?.get(0)?.filePath
+                    )
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    pairLiveData.postValue(it)
+                }, {
+                    errorLiveData.postValue(null)
+                }))
     }
 
     override fun onCleared() {

@@ -4,6 +4,7 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
 import android.support.annotation.NonNull
 import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
+import com.caferk.my_movies.model.RestApi
 import com.caferk.my_movies.ui.main.popular.MovieDataModel
 import com.caferk.my_movies.ui.main.popular.PopularMoviesViewModel
 import com.caferk.my_movies.util.gsonUpper
@@ -16,7 +17,7 @@ import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.disposables.Disposable
 import io.reactivex.internal.schedulers.ExecutorScheduler
 import io.reactivex.plugins.RxJavaPlugins
-import junit.framework.Assert.*
+import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Rule
