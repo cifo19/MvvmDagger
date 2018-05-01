@@ -22,12 +22,13 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private lateinit var toolbar: Toolbar
     private lateinit var progressBar: ProgressBar
     private lateinit var relativeLayout: RelativeLayout
+    var isLoadingShowed: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_layout)
-        toolbar = findViewById(R.id.toolbar) as Toolbar
-        relativeLayout = findViewById(R.id.root) as RelativeLayout
+        toolbar = findViewById(R.id.toolbar)
+        relativeLayout = findViewById(R.id.root)
         initializeActivityComponent()
         initializeActivity(savedInstanceState)
         initializeProgressBar()
@@ -39,7 +40,7 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     internal abstract fun initializeActivity(savedInstanceState: Bundle?)
 
-    internal fun initializeToolbar() {
+    private fun initializeToolbar() {
         if (useToolbar()) {
             setSupportActionBar(toolbar)
             if (useBackToolbar()) {
@@ -78,10 +79,11 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         progressBar.visibility = View.GONE
     }
 
-    private fun isLoaderShowing(): Boolean? = progressBar.visibility == View.VISIBLE
+    fun isLoaderShowing(): Boolean = progressBar.visibility == View.VISIBLE
 
     private fun showLoader() {
         progressBar.visibility = View.VISIBLE
+        isLoadingShowed = true
     }
 
     private fun hideLoader() {
@@ -95,8 +97,8 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
     fun setLoadingState(loadingLiveData: MutableLiveData<Boolean>) = loadingLiveData.observe(
             this, Observer {
         when (it) {
-            true -> if (!isLoaderShowing()!!) showLoader()
-            false -> if (isLoaderShowing()!!) hideLoader()
+            true -> if (!isLoaderShowing()) showLoader()
+            false -> if (isLoaderShowing()) hideLoader()
         }
     }
     )

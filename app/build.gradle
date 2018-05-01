@@ -16,7 +16,10 @@ android {
     }
 
     sourceSets {
-        androidTest.resources.srcDirs += ['src/test/resources']
+        androidTest {
+            resources.srcDirs += ['src/test/resources']
+            resources.exclude '**/mockito-extensions/*'
+        }
     }
 
     buildTypes {

@@ -3,25 +3,30 @@ package com.caferk.my_movies
 import android.content.Intent
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.support.v7.widget.RecyclerView.ViewHolder
 import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
+import com.caferk.my_movies.idlingresources.LoadingIdlingResource
+import com.caferk.my_movies.model.RestApi
 import com.caferk.my_movies.ui.main.MainActivity
-import com.caferk.my_movies.ui.main.popular.MovieDataModel
 import com.caferk.my_movies.util.gsonUpper
 import com.caferk.my_movies.util.parseFileWith
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import javax.inject.Inject
-import android.support.v7.widget.RecyclerView.ViewHolder
+import org.mockito.MockitoAnnotations
+import retrofit2.Response
 import java.io.IOException
+import javax.inject.Inject
 
 
 @RunWith(AndroidJUnit4::class)
@@ -38,10 +43,12 @@ class PopularMoviesFragmentTest {
     val activityTestRule = ActivityTestRule<MainActivity>(MainActivity::class.java, false, false)
 
     @Inject
-    lateinit var movieDataModel: MovieDataModel
+    lateinit var restApi: RestApi
 
     @Inject
     lateinit var contextToString: String
+
+    private lateinit var loadingIdlingResource: LoadingIdlingResource
 
     private val getPopularMoviesSuccessResponsePath = "get_popular_movies_success.json"
     private val language = "en"
@@ -49,14 +56,16 @@ class PopularMoviesFragmentTest {
 
     @Before
     fun setup() {
+        MockitoAnnotations.initMocks(this)
         val testApplication = InstrumentationRegistry
                 .getTargetContext().applicationContext as BaseTestApplication
         testApplication.testApplicationComponent.inject(this)
 
         val popularMoviesResponse: MovieResults = getPopularMoviesSuccessResponsePath parseFileWith gsonUpper
-        whenever(movieDataModel.getPopularMovies(language, page)).thenReturn(Observable.just(popularMoviesResponse))
+        whenever(restApi.getPopularMovies(language, page)).thenReturn(Observable.just(Response.success(popularMoviesResponse)))
 
         activityTestRule.launchActivity(Intent())
+        loadingIdlingResource = LoadingIdlingResource(activityTestRule.activity)
     }
 
     @Test
@@ -71,9 +80,10 @@ class PopularMoviesFragmentTest {
                 .check(matches(isDisplayed()))
     }
 
-    @Throws(IOException::class)
     @Test
     fun testCheckRecyclerViewItem() {
+        IdlingRegistry.getInstance().register(loadingIdlingResource)
+
         onView(withId(R.id.frPopularMovies_rvMovies))
                 .perform(scrollToPosition<ViewHolder>(5))
                 .check(matches(hasDescendant(withText(position5Title))))
@@ -85,5 +95,7 @@ class PopularMoviesFragmentTest {
         onView(withId(R.id.frPopularMovies_rvMovies))
                 .perform(scrollToPosition<ViewHolder>(16))
                 .check(matches(hasDescendant(withText(position16Title))))
+
+        IdlingRegistry.getInstance().unregister(loadingIdlingResource)
     }
 }

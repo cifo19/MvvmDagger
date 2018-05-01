@@ -3,7 +3,6 @@ package com.caferk.my_movies.di.component
 import com.caferk.my_movies.BaseTestApplication
 import com.caferk.my_movies.PopularMoviesFragmentTest
 import com.caferk.my_movies.di.TestActivitiesModule
-import com.caferk.my_movies.di.TestDataModule
 import com.caferk.my_movies.di.TestMovieDbServiceModule
 import com.caferk.my_movies.di.TestUIModule
 import com.caferk.my_movies.di.example.ExampleModule
@@ -20,7 +19,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [(AndroidInjectionModule::class), (AndroidSupportInjectionModule::class),
     (TestUIModule::class), (TestActivitiesModule::class), (ViewModelModule::class),
-    (TestMovieDbServiceModule::class), (TestDataModule::class), (ExampleModule::class)])
+    (TestMovieDbServiceModule::class), (ExampleModule::class)])
 interface TestApplicationComponent {
 
     @Component.Builder

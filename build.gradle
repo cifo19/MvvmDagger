@@ -16,7 +16,6 @@ buildscript {
     ext.timberVersion = '4.5.1'
     ext.butterKnifeVersion = '8.8.1'
     ext.jUnitVersion = '4.10'
-    ext.mockitoVersion = '1.9.5'//'2.0.43-beta', wait for dexmaker
     ext.kotlinMockito = '1.5.0'
     ext.androidSupportVersion = '27.1.0'
     ext.architectureComponents = '1.1.1'
