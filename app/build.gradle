@@ -6,12 +6,12 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.caferk.my_movies"
+        applicationId "com.caferk.movies"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "com.caferk.my_movies.testrunner.MockTestRunner"
+        testInstrumentationRunner "com.caferk.movies.testrunner.MockTestRunner"
         multiDexEnabled true
     }
 
