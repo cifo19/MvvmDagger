@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.OnClick
 import com.caferk.kotlinbasearchitecture.domain.entity.ResultsItem
@@ -75,6 +76,8 @@ class PopularMoviesFragment : BaseFragment() {
             val intent = Intent(activity, DetailActivity::class.java)
             intent.putExtra(DetailActivity.MOVIE_ID, recyclerMovieAdapter.list[0].id)
             startActivity(intent)
+        } else {
+            Toast.makeText(context, getString(R.string.empty_list_error), Toast.LENGTH_SHORT).show()
         }
     }
 

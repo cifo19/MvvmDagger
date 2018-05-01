@@ -3,7 +3,9 @@ package com.caferk.movies.idlingresources
 import android.os.Handler
 import android.support.test.espresso.IdlingResource
 import android.support.test.espresso.IdlingResource.ResourceCallback
+import android.util.Log
 import com.caferk.movies.ui.base.BaseActivity
+import java.util.*
 
 /**
  * Created by cafer on 29.4.2018.
@@ -14,7 +16,7 @@ class LoadingIdlingResource(private val baseActivity: BaseActivity) : IdlingReso
         private const val IDLE_POLL_DELAY_MILLIS: Long = 100
     }
 
-    lateinit var resourceCallback: ResourceCallback
+    private lateinit var resourceCallback: ResourceCallback
 
     override fun getName(): String = "Is loading Idle"
 
@@ -22,6 +24,8 @@ class LoadingIdlingResource(private val baseActivity: BaseActivity) : IdlingReso
         val canGoIdle = baseActivity.run {
             isLoadingShowed.and(isLoaderShowing().not())
         }
+
+        Log.d("canGoIdle", canGoIdle.toString() + " " + Calendar.getInstance().time)
 
         if (canGoIdle)
             resourceCallback.onTransitionToIdle()

@@ -48,4 +48,6 @@
     <string name="message_update">Please, update the application</string>
     <string name="message_ok">Ok</string>
 
+    <string name="empty_list_error">List is Empty</string>
+
 </resources>

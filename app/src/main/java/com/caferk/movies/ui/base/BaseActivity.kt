@@ -65,9 +65,9 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private fun useToolbar(): Boolean = true
     open fun useBackToolbar(): Boolean = true
 
-    protected fun addFragment(containerViewId: Int, fragment: Fragment) {
+    protected fun addFragment(containerViewId: Int, fragment: Fragment, fragmentTag: String = "") {
         val fragmentTransaction = this.supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(containerViewId, fragment)
+        fragmentTransaction.add(containerViewId, fragment, fragmentTag)
         fragmentTransaction.commit()
     }
 

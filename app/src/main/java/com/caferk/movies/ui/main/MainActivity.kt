@@ -21,7 +21,7 @@ class MainActivity : BaseActivity() {
 
     override fun initializeActivity(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
-            addFragment(R.id.fragment_container, PopularMoviesFragment.newInstance("Custom Title"))
+            addFragment(R.id.fragment_container, PopularMoviesFragment.newInstance("Custom Title"), PopularMoviesFragment::class.java.name)
         }
     }
 
