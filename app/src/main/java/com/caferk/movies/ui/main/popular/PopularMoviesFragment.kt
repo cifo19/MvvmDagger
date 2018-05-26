@@ -1,8 +1,6 @@
 package com.caferk.movies.ui.main.popular
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -27,9 +25,7 @@ class PopularMoviesFragment : BaseFragment() {
     lateinit var recyclerMovieAdapter: RecyclerMovieAdapter
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private lateinit var popularMoviesViewModel: PopularMoviesViewModel
+    lateinit var popularMoviesViewModel: PopularMoviesViewModel
 
     @BindView(R.id.frPopularMovies_rvMovies)
     lateinit var recyclerView: RecyclerView
@@ -47,7 +43,6 @@ class PopularMoviesFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        popularMoviesViewModel = ViewModelProviders.of(this, viewModelFactory)[PopularMoviesViewModel::class.java]
         popularMoviesViewModel.movieListLiveData.observe(this, Observer {
             showPopularMovies(it?.results)
         })
