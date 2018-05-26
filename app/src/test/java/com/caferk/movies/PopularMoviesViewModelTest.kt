@@ -6,8 +6,7 @@ import android.support.annotation.NonNull
 import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
 import com.caferk.movies.ui.main.popular.MovieDataModel
 import com.caferk.movies.ui.main.popular.PopularMoviesViewModel
-import com.caferk.movies.util.gsonUpper
-import com.caferk.movies.util.parseFileWith
+import com.caferk.movies.util.parseFile
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
@@ -84,7 +83,7 @@ class PopularMoviesViewModelTest {
     @Test
     fun getMovieList_whenGetPopularMoviesSuccess_thenPostMovieList() {
 
-        val popularMoviesResponse: MovieResults = getPopularMoviesSuccessResponsePath parseFileWith gsonUpper
+        val popularMoviesResponse: MovieResults = getPopularMoviesSuccessResponsePath.parseFile()
         whenever(movieDataModel.getPopularMovies(language, page)).thenReturn(Observable.just(popularMoviesResponse))
 
         popularMoviesViewModel.loadingLiveData.observeForever(loadingObserver)
