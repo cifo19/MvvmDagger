@@ -1,8 +1,6 @@
 package com.caferk.movies.ui.detail
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.widget.Toast
@@ -18,8 +16,6 @@ class DetailActivity : BaseActivity() {
     lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
     lateinit var detailViewModel: DetailViewModel
 
     companion object {
@@ -27,8 +23,6 @@ class DetailActivity : BaseActivity() {
     }
 
     override fun initializeActivity(savedInstanceState: Bundle?) {
-        detailViewModel = ViewModelProviders.of(this, viewModelFactory)[DetailViewModel::class.java]
-
         val movieId = intent.getIntExtra(MOVIE_ID, -1)
 
         detailViewModel.let {

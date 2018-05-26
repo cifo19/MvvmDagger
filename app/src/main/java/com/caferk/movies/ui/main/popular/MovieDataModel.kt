@@ -14,7 +14,7 @@ import javax.inject.Inject
  * Created by cafer on 2.4.2018.
  */
 class MovieDataModel
-@Inject constructor(val restApi: RestApi) {
+@Inject constructor(private val restApi: RestApi) {
 
     private var movieDetails: Observable<Pair<PersonMovieCredits?, PersonImages?>>? = null
 

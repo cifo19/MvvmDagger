@@ -8,7 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class DetailViewModel @Inject constructor(val movieDataModel: MovieDataModel) : BaseViewModel() {
+class DetailViewModel @Inject constructor(private val movieDataModel: MovieDataModel) : BaseViewModel() {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
