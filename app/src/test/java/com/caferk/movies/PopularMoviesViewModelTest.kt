@@ -33,19 +33,19 @@ import java.util.concurrent.TimeUnit
 class PopularMoviesViewModelTest {
 
     @Mock
-    lateinit var movieDataModel: MovieDataModel
+    private lateinit var movieDataModel: MovieDataModel
 
     @Mock
-    lateinit var loadingObserver: Observer<Boolean>
+    private lateinit var loadingObserver: Observer<Boolean>
 
     @Mock
-    lateinit var movieResultObserver: Observer<MovieResults>
+    private lateinit var movieResultObserver: Observer<MovieResults>
 
-    lateinit var popularMoviesViewModel: PopularMoviesViewModel
+    private lateinit var popularMoviesViewModel: PopularMoviesViewModel
 
-    val getPopularMoviesSuccessResponsePath = "get_popular_movies_success.json"
-    val language = "en"
-    val page = 1
+    private val getPopularMoviesSuccessResponsePath = "get_popular_movies_success.json"
+    private val language = "en"
+    private val page = 1
 
 
     companion object {
