@@ -1,8 +1,5 @@
 package com.caferk.movies
 
-import android.app.Activity
-import android.app.Instrumentation
-import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
@@ -11,11 +8,10 @@ import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import android.support.test.espresso.intent.Intents.intended
-import android.support.test.espresso.intent.Intents.intending
-import android.support.test.espresso.intent.matcher.IntentMatchers.*
+import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
+import android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.ViewMatchers.*
-import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView.ViewHolder
 import com.caferk.kotlinbasearchitecture.domain.entity.Credits
@@ -26,12 +22,11 @@ import com.caferk.movies.idlingresources.LoadingIdlingResource
 import com.caferk.movies.model.RestApi
 import com.caferk.movies.ui.detail.DetailActivity
 import com.caferk.movies.ui.main.MainActivity
-import com.caferk.movies.ui.main.popular.PopularMoviesFragment
-import com.caferk.movies.util.gsonUpper
-import com.caferk.movies.util.parseFileWith
+import com.caferk.movies.util.parseFile
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
+import org.hamcrest.CoreMatchers.allOf
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -39,10 +34,6 @@ import org.junit.runner.RunWith
 import org.mockito.MockitoAnnotations
 import retrofit2.Response
 import javax.inject.Inject
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.RootMatchers.withDecorView
-import android.support.test.espresso.Espresso.onView
-import org.hamcrest.CoreMatchers.*
 
 
 @RunWith(AndroidJUnit4::class)
@@ -81,10 +72,10 @@ class PopularMoviesFragmentTest {
                 .getTargetContext().applicationContext as BaseTestApplication
         testApplication.testApplicationComponent.inject(this)
 
-        val popularMoviesResponse: MovieResults = getPopularMoviesSuccessResponsePath parseFileWith gsonUpper
-        val creditsByMovieResponse: Credits = getCreditsByMovieSuccessResponsePath parseFileWith gsonUpper
-        val personImagesResponse: PersonImages = getPersonImagesSuccessResponsePath parseFileWith gsonUpper
-        val personMovieCreditsResponse: PersonMovieCredits = getPersonMovieCreditsSuccessResponsePath parseFileWith gsonUpper
+        val popularMoviesResponse: MovieResults = getPopularMoviesSuccessResponsePath.parseFile()
+        val creditsByMovieResponse: Credits = getCreditsByMovieSuccessResponsePath.parseFile()
+        val personImagesResponse: PersonImages = getPersonImagesSuccessResponsePath.parseFile()
+        val personMovieCreditsResponse: PersonMovieCredits = getPersonMovieCreditsSuccessResponsePath.parseFile()
 
         whenever(restApi.getPopularMovies(language, page)).thenReturn(Observable.just(Response.success(popularMoviesResponse)))
         whenever(restApi.getCreditsByMovie(any())).thenReturn(Observable.just(Response.success(creditsByMovieResponse)))
@@ -106,6 +97,7 @@ class PopularMoviesFragmentTest {
         onView(withId(R.id.frPopularMovies_rvMovies))
                 .check(matches(isDisplayed()))
     }
+
     @Test
     fun testCheckRecyclerViewItem() {
         IdlingRegistry.getInstance().register(loadingIdlingResource)

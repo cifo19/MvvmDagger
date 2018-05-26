@@ -6,8 +6,7 @@ import android.support.annotation.NonNull
 import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
 import com.caferk.movies.ui.main.popular.MovieDataModel
 import com.caferk.movies.ui.main.popular.PopularMoviesViewModel
-import com.caferk.movies.util.gsonUpper
-import com.caferk.movies.util.parseFileWith
+import com.caferk.movies.util.parseFile
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
@@ -33,19 +32,19 @@ import java.util.concurrent.TimeUnit
 class PopularMoviesViewModelTest {
 
     @Mock
-    lateinit var movieDataModel: MovieDataModel
+    private lateinit var movieDataModel: MovieDataModel
 
     @Mock
-    lateinit var loadingObserver: Observer<Boolean>
+    private lateinit var loadingObserver: Observer<Boolean>
 
     @Mock
-    lateinit var movieResultObserver: Observer<MovieResults>
+    private lateinit var movieResultObserver: Observer<MovieResults>
 
-    lateinit var popularMoviesViewModel: PopularMoviesViewModel
+    private lateinit var popularMoviesViewModel: PopularMoviesViewModel
 
-    val getPopularMoviesSuccessResponsePath = "get_popular_movies_success.json"
-    val language = "en"
-    val page = 1
+    private val getPopularMoviesSuccessResponsePath = "get_popular_movies_success.json"
+    private val language = "en"
+    private val page = 1
 
 
     companion object {
@@ -84,7 +83,7 @@ class PopularMoviesViewModelTest {
     @Test
     fun getMovieList_whenGetPopularMoviesSuccess_thenPostMovieList() {
 
-        val popularMoviesResponse: MovieResults = getPopularMoviesSuccessResponsePath parseFileWith gsonUpper
+        val popularMoviesResponse: MovieResults = getPopularMoviesSuccessResponsePath.parseFile()
         whenever(movieDataModel.getPopularMovies(language, page)).thenReturn(Observable.just(popularMoviesResponse))
 
         popularMoviesViewModel.loadingLiveData.observeForever(loadingObserver)
