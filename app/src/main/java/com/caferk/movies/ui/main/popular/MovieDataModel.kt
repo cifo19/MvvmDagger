@@ -20,27 +20,25 @@ class MovieDataModel
 
     fun getPopularMovies(language: String, page: Int): Observable<MovieResults> {
         return restApi.getPopularMovies(language, page)
-                .delay(1000, TimeUnit.MILLISECONDS)
-                .map { it.body() }
+            .delay(1000, TimeUnit.MILLISECONDS)
+            .map { it.body() }
     }
 
     @Synchronized
     fun getMovieDetails(movieId: Int): Observable<Pair<PersonMovieCredits?, PersonImages?>>? {
         if (movieDetails == null) {
             movieDetails = restApi.getCreditsByMovie(movieId)
-                    .delay(2000, TimeUnit.MILLISECONDS)
-                    .map { it.body()?.cast?.get(0)?.id }
-                    .flatMap { it ->
-                        Observable
-                                .zip(restApi.getPersonMovieCredits(it)
-                                        ,
-                                        restApi.getPersonImages(it)
-                                        ,
-                                        BiFunction<Response<PersonMovieCredits>, Response<PersonImages>, Pair<PersonMovieCredits?, PersonImages?>>
-                                        { personMovieCredits, personImages ->
-                                            Pair(personMovieCredits.body(), personImages.body())
-                                        })
-                    }
+                .delay(2000, TimeUnit.MILLISECONDS)
+                .map { it.body()?.cast?.get(0)?.id }
+                .flatMap { it ->
+                    Observable
+                        .zip(restApi.getPersonMovieCredits(it),
+                            restApi.getPersonImages(it),
+                            BiFunction<Response<PersonMovieCredits>, Response<PersonImages>, Pair<PersonMovieCredits?, PersonImages?>>
+                            { personMovieCredits, personImages ->
+                                Pair(personMovieCredits.body(), personImages.body())
+                            })
+                }
         }
         return movieDetails
     }

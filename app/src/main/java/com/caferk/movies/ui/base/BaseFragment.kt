@@ -31,9 +31,9 @@ abstract class BaseFragment : Fragment() {
     abstract fun getViewModel(): BaseViewModel?
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(layoutId(), container, false)
         try {
@@ -45,9 +45,7 @@ abstract class BaseFragment : Fragment() {
         return view
     }
 
-    fun getBaseActivity(): BaseActivity {
-        return activity as BaseActivity
-    }
+    fun getBaseActivity() = activity as BaseActivity
 
     override fun onDestroy() {
         super.onDestroy()
