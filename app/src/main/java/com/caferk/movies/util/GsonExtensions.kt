@@ -17,6 +17,4 @@ inline infix fun <reified T> Gson.from(fileName: String): T {
     val reader = BufferedReader(InputStreamReader(resource, "UTF-8"))
     return fromJson(reader, type)
 }
-
-inline infix fun <reified T> String.parseFileWith(gson: Gson): T = gson.from(this)
 inline fun <reified T> String.parseFile(): T = gson from this

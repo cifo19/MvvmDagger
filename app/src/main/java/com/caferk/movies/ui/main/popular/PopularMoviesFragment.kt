@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import butterknife.BindView
 import butterknife.OnClick
-import com.caferk.kotlinbasearchitecture.domain.entity.ResultsItem
+import com.caferk.movies.model.entity.ResultsItem
 import com.caferk.movies.R
 import com.caferk.movies.ui.adapter.RecyclerMovieAdapter
 import com.caferk.movies.ui.base.BaseFragment
