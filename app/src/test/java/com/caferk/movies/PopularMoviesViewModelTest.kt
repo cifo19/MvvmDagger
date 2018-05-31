@@ -2,11 +2,9 @@ package com.caferk.movies
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
-import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
+import com.caferk.movies.model.entity.MovieResults
 import com.caferk.movies.ui.main.popular.MovieDataModel
 import com.caferk.movies.ui.main.popular.PopularMoviesViewModel
-import com.caferk.movies.util.gsonUpper
-import com.caferk.movies.util.parseFileWith
 import com.caferk.movies.utils.TestUtils
 import com.caferk.movies.util.parseFile
 import com.nhaarman.mockito_kotlin.verify

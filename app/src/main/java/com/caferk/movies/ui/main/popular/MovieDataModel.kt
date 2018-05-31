@@ -1,8 +1,8 @@
 package com.caferk.movies.ui.main.popular
 
-import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
-import com.caferk.kotlinbasearchitecture.domain.entity.PersonImages
-import com.caferk.kotlinbasearchitecture.domain.entity.PersonMovieCredits
+import com.caferk.movies.model.entity.MovieResults
+import com.caferk.movies.model.entity.PersonImages
+import com.caferk.movies.model.entity.PersonMovieCredits
 import com.caferk.movies.model.RestApi
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction

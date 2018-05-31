@@ -1,6 +1,6 @@
 package com.caferk.movies.di
 
-import com.caferk.kotlinbasearchitecture.domain.entity.ResultsItem
+import com.caferk.movies.model.entity.ResultsItem
 import dagger.Module
 import dagger.Provides
 

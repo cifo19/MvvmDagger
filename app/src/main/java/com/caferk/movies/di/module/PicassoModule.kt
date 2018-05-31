@@ -16,8 +16,8 @@ open class PicassoModule {
 
     @Provides
     @Singleton
-    fun OkHttpDownloader(okHttpClient: OkHttpClient): OkHttpDownloader {
-        return OkHttpDownloader(okHttpClient)
+    fun okHttpDownloader(okHttpClient: OkHttpClient): OkHttpDownloader {
+        return okHttpDownloader(okHttpClient)
     }
 
     @Provides

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import com.caferk.kotlinbasearchitecture.domain.entity.ResultsItem
+import com.caferk.movies.model.entity.ResultsItem
 import com.caferk.movies.R
 import javax.inject.Inject
 
