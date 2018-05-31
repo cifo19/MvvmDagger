@@ -12,27 +12,35 @@ import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import com.caferk.movies.R
 import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.annotations.Nullable
+import javax.inject.Inject
 
 /**
  * Created by cafer on 2.4.2018.
  */
 abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
+
     private lateinit var toolbar: Toolbar
     private lateinit var progressBar: ProgressBar
     private lateinit var relativeLayout: RelativeLayout
     var isLoadingShowed: Boolean = false
+
+    @Inject
+    lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_layout)
         toolbar = findViewById(R.id.toolbar)
         relativeLayout = findViewById(R.id.root)
-        initializeActivityComponent()
+        injection()
         initializeActivity(savedInstanceState)
         initializeProgressBar()
         initializeToolbar()
+
         if (getViewModel() != null) {
             setLoadingState(getViewModel()?.loadingLiveData!!)
         }
@@ -56,11 +64,9 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     @Nullable
-    abstract fun getViewModel(): BaseViewModel?
+    open fun getViewModel(): BaseViewModel? = null
 
-    private fun initializeActivityComponent() {
-        AndroidInjection.inject(this)
-    }
+    private fun injection() = AndroidInjection.inject(this)
 
     private fun useToolbar(): Boolean = true
     open fun useBackToolbar(): Boolean = true
@@ -94,12 +100,16 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         return applicationContext
     }
 
-    fun setLoadingState(loadingLiveData: MutableLiveData<Boolean>) = loadingLiveData.observe(
-            this, Observer {
-        when (it) {
-            true -> if (!isLoaderShowing()) showLoader()
-            false -> if (isLoaderShowing()) hideLoader()
-        }
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return fragmentDispatchingAndroidInjector
     }
+
+    fun setLoadingState(loadingLiveData: MutableLiveData<Boolean>) = loadingLiveData.observe(
+        this, Observer {
+            when (it) {
+                true -> if (!isLoaderShowing()) showLoader()
+                false -> if (isLoaderShowing()) hideLoader()
+            }
+        }
     )
 }
