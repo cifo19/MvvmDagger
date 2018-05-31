@@ -12,7 +12,6 @@ import com.caferk.kotlinbasearchitecture.domain.entity.ResultsItem
 import com.caferk.movies.R
 import com.caferk.movies.ui.adapter.RecyclerMovieAdapter
 import com.caferk.movies.ui.base.BaseFragment
-import com.caferk.movies.ui.base.BaseViewModel
 import com.caferk.movies.ui.detail.DetailActivity
 import javax.inject.Inject
 
@@ -48,13 +47,9 @@ class PopularMoviesFragment : BaseFragment() {
         })
     }
 
-    override fun layoutId(): Int {
-        return R.layout.fragment_movies
-    }
+    override fun layoutId() = R.layout.fragment_movies
 
-    override fun getViewModel(): BaseViewModel? {
-        return popularMoviesViewModel
-    }
+    override fun getViewModel() = popularMoviesViewModel
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -63,7 +58,6 @@ class PopularMoviesFragment : BaseFragment() {
         }
         popularMoviesViewModel.getMovieList()
     }
-
 
     @OnClick(R.id.btn_create_new_note)
     fun onButtonClicked() {
@@ -76,7 +70,7 @@ class PopularMoviesFragment : BaseFragment() {
         }
     }
 
-    fun showPopularMovies(popularMoviesList: List<ResultsItem>?) {
+    private fun showPopularMovies(popularMoviesList: List<ResultsItem>?) {
         recyclerView.layoutManager =
                 LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = recyclerMovieAdapter

@@ -10,6 +10,7 @@ import dagger.Provides
 
 @Module
 abstract class AbstractDetailActivityModule {
+
     @Binds
     abstract fun bindDetailActivity(detailActivity: DetailActivity): BaseActivity
 }
@@ -20,7 +21,10 @@ object DetailActivityModule {
     @Provides
     @JvmStatic
     @PerActivity
-    fun provideDetailActivityViewModel(baseActivity: BaseActivity, viewModelProviderFactory: ViewModelProvider.Factory): DetailViewModel {
-        return ViewModelProviders.of(baseActivity, viewModelProviderFactory)[DetailViewModel::class.java]
+    fun provideDetailViewModel(
+        baseActivity: BaseActivity,
+        viewModelFactory: ViewModelProvider.Factory
+    ): DetailViewModel {
+        return ViewModelProviders.of(baseActivity, viewModelFactory)[DetailViewModel::class.java]
     }
 }
