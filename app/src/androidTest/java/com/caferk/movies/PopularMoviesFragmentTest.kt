@@ -14,10 +14,10 @@ import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView.ViewHolder
-import com.caferk.kotlinbasearchitecture.domain.entity.Credits
-import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
-import com.caferk.kotlinbasearchitecture.domain.entity.PersonImages
-import com.caferk.kotlinbasearchitecture.domain.entity.PersonMovieCredits
+import com.caferk.movies.model.entity.Credits
+import com.caferk.movies.model.entity.MovieResults
+import com.caferk.movies.model.entity.PersonImages
+import com.caferk.movies.model.entity.PersonMovieCredits
 import com.caferk.movies.idlingresources.LoadingIdlingResource
 import com.caferk.movies.model.RestApi
 import com.caferk.movies.ui.detail.DetailActivity

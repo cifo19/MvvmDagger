@@ -1,4 +1,4 @@
-package com.caferk.kotlinbasearchitecture.domain.entity
+package com.caferk.movies.model.entity
 
 import com.google.gson.annotations.SerializedName
 

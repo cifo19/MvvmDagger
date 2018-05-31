@@ -1,7 +1,7 @@
 package com.caferk.movies.ui.main.popular
 
 import android.arch.lifecycle.MutableLiveData
-import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
+import com.caferk.movies.model.entity.MovieResults
 import com.caferk.movies.ui.base.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

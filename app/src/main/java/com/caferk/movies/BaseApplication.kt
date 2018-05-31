@@ -17,7 +17,7 @@ open class BaseApplication : Application(), HasActivityInjector {
     @Inject
     lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
 
-    lateinit var applicationComponent: ApplicationComponent
+    private lateinit var applicationComponent: ApplicationComponent
 
     override fun activityInjector(): AndroidInjector<Activity> {
         return dispatchingActivityInjector

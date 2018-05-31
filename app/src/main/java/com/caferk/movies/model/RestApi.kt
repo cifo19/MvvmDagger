@@ -1,9 +1,9 @@
 package com.caferk.movies.model
 
-import com.caferk.kotlinbasearchitecture.domain.entity.Credits
-import com.caferk.kotlinbasearchitecture.domain.entity.MovieResults
-import com.caferk.kotlinbasearchitecture.domain.entity.PersonImages
-import com.caferk.kotlinbasearchitecture.domain.entity.PersonMovieCredits
+import com.caferk.movies.model.entity.Credits
+import com.caferk.movies.model.entity.MovieResults
+import com.caferk.movies.model.entity.PersonImages
+import com.caferk.movies.model.entity.PersonMovieCredits
 import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.http.GET
@@ -14,12 +14,12 @@ import retrofit2.http.Query
  * Created by cafer on 2.4.2018.
  */
 interface RestApi {
-    val BASE_URL: String
-        get() = "https://api.themoviedb.org/"
 
     @GET("movie/popular")
-    fun getPopularMovies(@Query("language") language: String,
-                         @Query("page") page: Int): Observable<Response<MovieResults>>
+    fun getPopularMovies(
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Observable<Response<MovieResults>>
 
     @GET("/movie/{movie_id}/credits")
     fun getCreditsByMovie(@Path("movie_id") movieId: Int): Observable<Response<Credits>>
