@@ -19,26 +19,43 @@ constructor(private val movieDataModel: MovieDataModel) : BaseViewModel() {
 
     fun getMovieList() {
         compositeDisposable.add(movieDataModel.getPopularMovies("en", 1)
-            .doOnSubscribe { loadingLiveData.postValue(true) }
-            .doOnError {
-                movieListLiveData.postValue(MovieResults(results = emptyList()))
-            }
-            .doOnTerminate {
-                loadingLiveData.postValue(false)
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    movieListLiveData.postValue(it)
-                },
-                {
-                })
+                .doOnSubscribe { loadingLiveData.postValue(true) }
+                .doOnError {
+                    movieListLiveData.postValue(MovieResults(results = emptyList()))
+                }
+                .doOnTerminate {
+                    loadingLiveData.postValue(false)
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            movieListLiveData.postValue(it)
+                        },
+                        {
+                        })
         )
     }
 
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()
+    }
+}
+
+data class DataHolder(val name: String, val surName: String, val age: Int)
+
+class DataRetriever {
+
+    fun takeDoAnyOnDataHolder(dataAnalyzer: DataAnalyzer) {
+        val dataHolder = DataHolder("Cafer", "Kaya", 15)
+        dataAnalyzer.printDataInformations(dataHolder)
+    }
+}
+
+class DataAnalyzer {
+
+    fun printDataInformations(dataHolder: DataHolder): String {
+        return dataHolder.toString()
     }
 }
