@@ -3,10 +3,10 @@ package com.caferk.movies
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
 import com.caferk.movies.model.entity.MovieResults
-import com.caferk.movies.ui.main.popular.MovieDataModel
-import com.caferk.movies.ui.main.popular.PopularMoviesViewModel
+import com.caferk.movies.ui.main.popular.*
 import com.caferk.movies.utils.TestUtils
 import com.caferk.movies.util.parseFile
+import com.nhaarman.mockito_kotlin.capture
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
@@ -14,6 +14,8 @@ import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.ArgumentCaptor
+import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
@@ -42,6 +44,12 @@ class PopularMoviesViewModelTest {
     @JvmField
     val rule = InstantTaskExecutorRule()
 
+    @Mock
+    private lateinit var dataAnalyzer: DataAnalyzer
+
+    @Captor
+    private lateinit var dataHolderCaptor: ArgumentCaptor<DataHolder>
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -53,11 +61,11 @@ class PopularMoviesViewModelTest {
     fun getMovieList_whenGetPopularMoviesSuccess_thenPostMovieList() {
 
         val popularMoviesResponse: MovieResults =
-            getPopularMoviesSuccessResponsePath.parseFile()
+                getPopularMoviesSuccessResponsePath.parseFile()
         whenever(movieDataModel.getPopularMovies(language, page)).thenReturn(
-            Observable.just(
-                popularMoviesResponse
-            )
+                Observable.just(
+                        popularMoviesResponse
+                )
         )
 
         popularMoviesViewModel.loadingLiveData.observeForever(loadingObserver)
@@ -77,9 +85,9 @@ class PopularMoviesViewModelTest {
 
         val movieResults = MovieResults(results = emptyList())
         whenever(movieDataModel.getPopularMovies(language, page)).thenReturn(
-            Observable.error(
-                Throwable()
-            )
+                Observable.error(
+                        Throwable()
+                )
         )
 
         popularMoviesViewModel.loadingLiveData.observeForever(loadingObserver)
@@ -92,5 +100,14 @@ class PopularMoviesViewModelTest {
         verify(movieResultObserver).onChanged(movieResults)
         assertEquals(movieResults, popularMoviesViewModel.movieListLiveData.value)
         verify(loadingObserver).onChanged(false)
+    }
+
+    @Test
+    fun argumentCapturing() {
+        val dataRetriever = DataRetriever()
+        dataRetriever.takeDoAnyOnDataHolder(dataAnalyzer)
+        verify(dataAnalyzer).printDataInformations(capture(dataHolderCaptor))
+
+        assertEquals("Cafer", dataHolderCaptor.value.name)
     }
 }
