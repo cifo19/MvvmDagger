@@ -15,8 +15,8 @@ import javax.inject.Inject
  * Created by cafer on 13.3.2018.
  */
 class RecyclerMovieAdapter @Inject constructor(
-    val list: MutableList<ResultsItem>
-) : RecyclerView.Adapter<RecyclerMovieAdapter.ViewHolder>() {o
+        val list: MutableList<ResultsItem>
+) : RecyclerView.Adapter<RecyclerMovieAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_rv, parent, false)
         return ViewHolder(view)
